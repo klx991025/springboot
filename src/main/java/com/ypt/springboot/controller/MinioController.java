@@ -63,20 +63,21 @@ public class MinioController {
             res.setMessage("上传文件不能为空");
             return res;
         }
-        String userId = request.getAttribute("userId").toString();
 
         List<String> orgfileNameList = new ArrayList<>(file.length);
+        User currentUser = TokenUtils.getCurrentUser();
 
         for (MultipartFile multipartFile : file) {
             String orgfileName = multipartFile.getOriginalFilename();
             orgfileNameList.add(orgfileName);
-
+            String s = orgfileName.split("\\.")[1];
             try {
                 InputStream in = multipartFile.getInputStream();
                 minioClient.putObject(MINIO_BUCKET, orgfileName, in, new PutObjectOptions(in.available(), -1));
                 Files files = new Files();
                 files.setUrl(orgfileName);
-                files.setUserId(Integer.parseInt(request.getAttribute("userId").toString()));
+                files.setUserId(currentUser.getId());
+                files.setType(s.toLowerCase());
                 files.setName(orgfileName);
                 fileMapper.insert(files);
                 in.close();

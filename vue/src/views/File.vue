@@ -43,8 +43,11 @@
       <el-table-column label="查看">
         <template slot-scope="scope" >
           <!--状态改变-->
-          <div class="demo-image__preview" v-if="previewImg">
+          <div class="demo-image__preview" v-if="scope.row.type === 'jpg' || scope.row.type === 'png'">
             <el-image style="width: 100px; height: 100px" :src="bucketURLFile + scope.row.url"></el-image>
+          </div>
+          <div v-else>
+            {{scope.row.name}}
           </div>
         </template>
       </el-table-column>

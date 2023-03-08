@@ -16,7 +16,6 @@ import com.ypt.springboot.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ypt.springboot.utils.TokenUtils;
 import org.springframework.stereotype.Service;
-import sun.rmi.runtime.Log;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;

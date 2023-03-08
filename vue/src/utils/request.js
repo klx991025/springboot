@@ -8,15 +8,13 @@ const request = axios.create({
     // baseURL: '/api',
 })
 
-export const setUserInfo = (val) => {
-    localStorage.setItem("user",JSON.stringify(val))//存储用户信息到浏览器
-}
 
 // request 拦截器
 // 可以自请求发送前对请求做一些处理
 // 比如统一加token，对请求参数统一加密
-let user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null
+
 request.interceptors.request.use(config => {
+    let user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null
     config.headers['Content-Type'] = 'application/json;charset=utf-8';
     console.log('user---',user)
     if(user){

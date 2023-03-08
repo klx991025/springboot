@@ -10,8 +10,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ypt.springboot.common.Constants;
 import com.ypt.springboot.common.Result;
 import com.ypt.springboot.controller.dto.UserDTO;
+import com.ypt.springboot.entity.AlarmLog;
 import com.ypt.springboot.entity.LoginLog;
 import com.ypt.springboot.entity.Role;
+import com.ypt.springboot.service.AlarmLogService;
 import com.ypt.springboot.service.IRoleService;
 import com.ypt.springboot.service.LoginService;
 import com.ypt.springboot.utils.TokenUtils;
@@ -50,6 +52,8 @@ public class UserController {
     private IUserService userService;
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private AlarmLogService alarmLogService;
     @Autowired
     private IRoleService iRoleService;
     @PostMapping
@@ -190,6 +194,22 @@ public class UserController {
             queryWrapper.like("username",username);
         }
         Page<LoginLog> page = loginService.page(new Page<>(pageNum, pageSize), queryWrapper);
+//        for (LoginLog item: page.getRecords()) {
+//            User byId = userService.getById(item.getUserId());
+//            item.setUsername(byId.getUsername());
+//        }
+        return Result.success(page);
+    }
+
+    @GetMapping("/pageAlarmLog")
+    public Result pageAlarmLog(@RequestParam Integer pageNum,
+                          @RequestParam Integer pageSize,
+                          @RequestParam(defaultValue = "") String updateBy) {
+        QueryWrapper<AlarmLog> queryWrapper = new QueryWrapper<>();
+        if(!"".equals(updateBy)){
+            queryWrapper.like("update_by",updateBy);
+        }
+        Page<AlarmLog> page = alarmLogService.page(new Page<>(pageNum, pageSize), queryWrapper);
 //        for (LoginLog item: page.getRecords()) {
 //            User byId = userService.getById(item.getUserId());
 //            item.setUsername(byId.getUsername());

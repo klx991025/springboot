@@ -4,9 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ypt.springboot.entity.Files;
+import com.ypt.springboot.entity.User;
 import com.ypt.springboot.mapper.FileMapper;
 import com.ypt.springboot.service.FileService;
 import com.ypt.springboot.utils.Res;
+import com.ypt.springboot.utils.TokenUtils;
 import io.minio.MinioClient;
 import io.minio.ObjectStat;
 import io.minio.PutObjectOptions;
@@ -158,10 +160,10 @@ public class MinioController {
 
     @GetMapping("/page")
     public com.ypt.springboot.common.Result findPage(@RequestParam Integer pageNum,
-                                                     @RequestParam Integer pageSize,
-                                                     HttpServletRequest request) {
+                                                     @RequestParam Integer pageSize) {
+        User currentUser = TokenUtils.getCurrentUser();
         QueryWrapper<Files> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_id",request.getAttribute("userId"));
+        queryWrapper.eq("user_id",currentUser.getId());
         Page page = new Page();
         page.setCurrent(pageNum);
         page.setSize(pageSize);

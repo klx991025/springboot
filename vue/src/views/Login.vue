@@ -67,6 +67,7 @@
 <script>
 import mySwitch from "../utils/mySwitch";
 import {setRoutes} from "../router";
+import {setUserInfo} from "../utils/request";
 
 export default {
   name:"Login",
@@ -98,11 +99,13 @@ export default {
         if(valid){//表单校验合法
           this.request.post("/user/login",this.user).then(res =>{
             if(res.code === '200'){
+              console.log('login---',res.data)
               localStorage.setItem("user",JSON.stringify(res.data))//存储用户信息到浏览器
               localStorage.setItem("menus", JSON.stringify(res.data.menus))  // 存储用户信息到浏览器
+              setUserInfo(res.data)
               //动态设置当前路由
               setRoutes()
-              this.$router.push("/")
+              this.$router.push("/home")
               this.$message.success("登陆成功")
             }else{
               this.$message.error(res.msg)

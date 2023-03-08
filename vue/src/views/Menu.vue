@@ -102,7 +102,7 @@ export default {
       tableData: [],
       total: 0,
       pageNum: 1,
-      pageSize: 10,
+      pageSize: 5,
       name: "",
       form: {},
       //

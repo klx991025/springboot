@@ -2,18 +2,19 @@
 <div>
 
   <div style="padding: 10px 0">
-    <el-input style="width: 200px" suffix-icon=" el-icon-search" placeholder="请输入用户名搜索" v-model="username"></el-input>
+    <el-input style="width: 200px" suffix-icon=" el-icon-search" placeholder="请输入处理人搜索" v-model="username"></el-input>
     <el-button class="ml-5" type="primary" @click="load">搜索</el-button>
     <el-button type="warning" @click="reset">重置</el-button>
   </div>
   <el-table :data="tableData" border stripe highlight-current-row header-cell-class-name="headerBg" @selection-change="handleSelectionChange">
     <el-table-column type="selection" width="55"></el-table-column>
-<!--    <el-table-column prop="id" label="id" width="80" align="center"></el-table-column>-->
-    <el-table-column prop="username" label="用户名" width="140" align="center"></el-table-column>
-    <el-table-column prop="ip" label="IP地址" width="120" align="center"></el-table-column>
-    <el-table-column prop="web" label="浏览器" align="center"></el-table-column>
-    <el-table-column prop="os" label="系统" align="center"></el-table-column>
-    <el-table-column prop="date" label="登录时间" align="center"></el-table-column>
+    <el-table-column prop="id" label="id" width="80" align="center"></el-table-column>
+    <el-table-column prop="username" label="设备名称" width="140" align="center"></el-table-column>
+    <el-table-column prop="ip" label="告警等级" width="120" align="center"></el-table-column>
+    <el-table-column prop="web" label="告警时间" align="center"></el-table-column>
+    <el-table-column prop="os" label="状态" align="center"></el-table-column>
+    <el-table-column prop="date" label="实际处理人" align="center"></el-table-column>
+    <el-table-column prop="date" label="处理时间" align="center"></el-table-column>
   </el-table>
   <div style="padding: 10px 0">
     <el-pagination
@@ -26,30 +27,6 @@
         :total="total">
     </el-pagination>
   </div>
-  <el-dialog title="新增用户信息" :visible.sync="dialogFormVisible" width="30%">
-    <el-form label-width="60px" >
-      <el-form-item label="用户名" size="small" >
-        <el-input v-model="form.username" disabled auto-complete="off"></el-input>
-      </el-form-item>
-      <!--角色-->
-      <el-form-item label="角色">
-        <el-select clearable v-model="form.role" placeholder="请选择角色" style="width: 100%">
-          <el-option v-for="item in roles" :key="item.flag" :label="item.name" :value="item.flag"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="昵称" >
-        <el-input v-model="form.nickname" auto-complete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="电话" >
-        <el-input v-model="form.phone" auto-complete="off"></el-input>
-      </el-form-item>
-
-    </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button @click="cancel" >取 消</el-button>
-      <el-button type="primary" @click="save">确 定</el-button>
-    </div>
-  </el-dialog>
 </div>
 </template>
 
@@ -61,7 +38,7 @@ export default {
         tableData: [],
         total: 0,
         pageNum:1,
-        pageSize:2,
+        pageSize:5,
         username:'',
         nickname:'',
         phone:'',
@@ -80,13 +57,11 @@ export default {
   methods: {
     load(){
       //请求分页查询
-      this.request.get("/user/pageLog",{
+      this.request.get("/user/pageAlarmLog",{
         params:{
           pageNum:this.pageNum,
           pageSize:this.pageSize,
-          username:this.username,
-          nickname:this.nickname,
-          phone:this.phone
+          username:this.username
         }
       }).then(res => {
         this.tableData = res.data.records

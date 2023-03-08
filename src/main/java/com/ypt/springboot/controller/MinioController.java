@@ -2,10 +2,8 @@ package com.ypt.springboot.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ypt.springboot.entity.Files;
-import com.ypt.springboot.entity.User;
 import com.ypt.springboot.mapper.FileMapper;
 import com.ypt.springboot.service.FileService;
 import com.ypt.springboot.utils.Res;
@@ -21,6 +19,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -36,7 +35,7 @@ public class MinioController {
     @Autowired
     private MinioClient minioClient;
     private static final String MINIO_BUCKET = "test";
-    @Autowired
+    @Resource
     private FileMapper fileMapper;
     @Autowired
     private FileService fileService;

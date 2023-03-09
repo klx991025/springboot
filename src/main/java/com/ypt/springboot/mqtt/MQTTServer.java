@@ -1,4 +1,5 @@
-package com.ypt.springboot.MQTT;
+package com.ypt.springboot.mqtt;
+
 
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
@@ -39,7 +40,7 @@ public class MQTTServer {
     private MQTTConfig config;
 
     public MQTTServer() {
-        LOGGER.info("8081上线了");
+        LOGGER.info("8888上线了");
     }
 
     /**
@@ -195,4 +196,3 @@ public class MQTTServer {
     }
 
 }
-

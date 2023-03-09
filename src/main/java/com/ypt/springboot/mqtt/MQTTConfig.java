@@ -1,4 +1,4 @@
-package com.ypt.springboot.MQTT;
+package com.ypt.springboot.mqtt;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.ypt.springboot.MQTT;
+package com.ypt.springboot.mqtt;
 
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.springframework.beans.factory.annotation.Autowired;

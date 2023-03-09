@@ -1,4 +1,4 @@
-package com.ypt.springboot.MQTT;
+package com.ypt.springboot.mqtt;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -57,4 +57,5 @@ public class PushCallback implements MqttCallback {
         System.out.println("接收消息内容 : " + result);
         //这里可以针对收到的消息做处理，比如持久化
     }
+
 }

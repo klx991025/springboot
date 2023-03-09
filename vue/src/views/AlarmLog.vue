@@ -9,12 +9,12 @@
   <el-table :data="tableData" border stripe highlight-current-row header-cell-class-name="headerBg" @selection-change="handleSelectionChange">
     <el-table-column type="selection" width="55"></el-table-column>
     <el-table-column prop="id" label="id" width="80" align="center"></el-table-column>
-    <el-table-column prop="username" label="设备名称" width="140" align="center"></el-table-column>
-    <el-table-column prop="ip" label="告警等级" width="120" align="center"></el-table-column>
-    <el-table-column prop="web" label="告警时间" align="center"></el-table-column>
-    <el-table-column prop="os" label="状态" align="center"></el-table-column>
-    <el-table-column prop="date" label="实际处理人" align="center"></el-table-column>
-    <el-table-column prop="date" label="处理时间" align="center"></el-table-column>
+    <el-table-column prop="name" label="设备名称" width="140" align="center"></el-table-column>
+    <el-table-column prop="level" label="告警等级" width="120" align="center"></el-table-column>
+    <el-table-column prop="date" label="告警时间" align="center"></el-table-column>
+    <el-table-column prop="status" label="状态" align="center"></el-table-column>
+    <el-table-column prop="updateBy" label="实际处理人" align="center"></el-table-column>
+    <el-table-column prop="updateTime" label="处理时间" align="center"></el-table-column>
   </el-table>
   <div style="padding: 10px 0">
     <el-pagination

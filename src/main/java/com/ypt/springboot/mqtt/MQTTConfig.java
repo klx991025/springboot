@@ -1,5 +1,8 @@
 package com.ypt.springboot.mqtt;
 
+
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,7 +12,13 @@ public class MQTTConfig {
     //指定配置文件application-local.properties中的属性名前缀
     public static final String PREFIX = "publish.mqtt";
     private String host;
+
+    @ApiModelProperty("初始化的客户端id")
+    @Value("${publish.mqtt.client.id}")
+    private String defaultClientid;
+    @ApiModelProperty("客户端id")
     private String clientid;
+
     private String username;
     private String password;
     private boolean cleansession;
@@ -27,11 +36,8 @@ public class MQTTConfig {
     }
 
     public String getClientid() {
+        clientid = defaultClientid + System.currentTimeMillis();
         return clientid;
-    }
-
-    public void setClientid(String clientid) {
-        this.clientid = clientid;
     }
 
     public String getUsername() {
